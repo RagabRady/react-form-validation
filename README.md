@@ -24,7 +24,7 @@ interface CreateOrUpdateEmployeeProps {}
 
 const Employee: FC<CreateOrUpdateEmployeeProps> = (props) => {
   
-  const formElement = useRef();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const [employee, setEmployee] = useState({
     id: 0,
@@ -55,7 +55,7 @@ const Employee: FC<CreateOrUpdateEmployeeProps> = (props) => {
   const addOrEdit = (event: any) => {
 
     event.preventDefault();
-    if (checkValidation(formElement.current)) {
+    if (checkValidation(formRef.current)) {
       alert("Your form is valid");
     }
   };
@@ -69,7 +69,7 @@ const Employee: FC<CreateOrUpdateEmployeeProps> = (props) => {
   return (
    
     <div> 
-      <form id="employeeForm" onSubmit={addOrEdit} noValidate>
+      <form id="employeeForm" onSubmit={addOrEdit} ref={formRef} noValidate>
         <div className="form-group">
           <label htmlFor="name">Full Name:</label>
           <input
@@ -140,7 +140,7 @@ interface CreateOrUpdateEmployeeProps {}
 
 const Employee: FC<CreateOrUpdateEmployeeProps> = (props) => {
   
-  const formElement = useRef();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const [employee, setEmployee] = useState({
     id: 0,
@@ -173,7 +173,7 @@ const Employee: FC<CreateOrUpdateEmployeeProps> = (props) => {
   const addOrEdit = (event: any) => {
 
     event.preventDefault();
-    if (checkValidation(formElement.current)) {
+    if (checkValidation(formRef.current)) {
       alert("Your form is valid");
     }
   };
@@ -187,7 +187,7 @@ const Employee: FC<CreateOrUpdateEmployeeProps> = (props) => {
   return (
    
     <div> 
-      <form id="employeeForm" onSubmit={addOrEdit} noValidate
+      <form id="employeeForm" onSubmit={addOrEdit} ref={formRef} noValidate
          onChange={(event) => setAsdisabled(!event.currentTarget.checkValidity())}
 
         <div className="form-group">
