@@ -1,0 +1,37 @@
+{
+  "name": "reactjs-form-validation",
+  "version": "1.0.6",
+  "description": "Validation for react form",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RagabRady/reactjs-form-validation.git"
+  },
+  "keywords": [
+    "react",
+    "validation"
+  ],
+  "author": "Ragab Rady",
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0 || ^18.0.0"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RagabRady/reactjs-form-validation/issues"
+  },
+  "homepage": "https://github.com/RagabRady/reactjs-form-validation#readme",
+  "devDependencies": {
+    "prettier": "^2.6.2",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.6.4"
+  },
+  "files": ["lib/**/*"]
+}
