@@ -6,12 +6,21 @@ export const checkValidation = (elem: any) => {
         const input = $inputs.item(index);
         if (input?.id) {
             let span = input?.nextElementSibling as HTMLSpanElement;
-            if (span) {
+           
+            if (span && span.tagName === 'SPAN') {
                 span.innerHTML = '';
+            }
+
+            if (!input.checkValidity() || input.getAttribute('match_input_id')) {
+                if (!(span && span.tagName === 'SPAN')) {
+                    span = document.createElement('span');
+                    span.classList.value = 'text-danger d-flex notValid';
+                    input?.parentNode?.insertBefore(span, input.nextElementSibling);
+                }
             } else {
-                span = document.createElement('span');
-                span.className = 'text-danger';
-                input?.parentNode?.insertBefore(span, input.nextElementSibling);
+                if (span && span.tagName === 'SPAN') {
+                    span.remove();
+                }
             }
 
             if (!input.checkValidity() || (input.required && input.value.trim() === '')) {
@@ -24,6 +33,9 @@ export const checkValidation = (elem: any) => {
                 } else if (input.validity.typeMismatch && input.type === 'email') {
                     const emailMsg = input?.getAttribute('email_msg') as string;
                     span.innerHTML = emailMsg;
+                } else if (input.validity.typeMismatch && input.type === 'url') {
+                    const urlMsg = input?.getAttribute('url_msg') as string;
+                    span.innerHTML = urlMsg;
                 } else if (input.validity.typeMismatch) {
                     const typeMsg = input?.getAttribute('type_msg') as string;
                     span.innerHTML = typeMsg;
@@ -41,6 +53,16 @@ export const checkValidation = (elem: any) => {
                     span.innerHTML = maxLengthMsg;
                 }
                 valid = false;
+            }
+
+            if (input.getAttribute('match-input-id')) {
+                const matchId = input.getAttribute('match-input-id') as string;
+                const matchInput = document.getElementById(matchId) as HTMLInputElement;
+                if (matchInput.value && input.value !== matchInput.value) {
+                    const misMatchMsg = input.getAttribute('mis-match-msg') as string;
+                    span.innerHTML = misMatchMsg;
+                    valid = false;
+                }
             }
         }
     }
@@ -75,30 +97,30 @@ export const checkValidation = (elem: any) => {
     const $textAreas = elem.getElementsByTagName('textarea') as HTMLCollectionOf<HTMLTextAreaElement>;
 
     for (let index = 0; index < $textAreas.length; index++) {
-        const elem = $textAreas.item(index);
+        const textElem = $textAreas.item(index);
 
-        if (elem?.id) {
+        if (textElem?.id) {
             let span = elem?.nextElementSibling as HTMLSpanElement;
             if (span) {
                 span.innerHTML = '';
             } else {
                 span = document.createElement('span');
                 span.className = 'text-danger';
-                elem?.parentNode?.insertBefore(span, elem.nextElementSibling);
+                textElem?.parentNode?.insertBefore(span, textElem.nextElementSibling);
             }
 
-            if (!elem?.checkValidity() || (elem?.required && elem?.value.trim() === '')) {
-                if (elem?.validity.valueMissing || elem?.value.trim() === '') {
-                    const requiredMsg = elem?.getAttribute('required_msg') as string;
+            if (!textElem?.checkValidity() || (textElem?.required && textElem?.value.trim() === '')) {
+                if (textElem?.validity.valueMissing || textElem?.value.trim() === '') {
+                    const requiredMsg = textElem?.getAttribute('required_msg') as string;
                     span.innerHTML = requiredMsg;
-                } else if (elem.validity.patternMismatch) {
-                    const patternMsg = elem?.getAttribute('pattern_msg') as string;
+                } else if (textElem.validity.patternMismatch) {
+                    const patternMsg = textElem?.getAttribute('pattern_msg') as string;
                     span.innerHTML = patternMsg;
-                } else if (elem.validity.tooShort) {
-                    const minLengthMsg = elem?.getAttribute('minlength_msg') as string;
+                } else if (textElem.validity.tooShort) {
+                    const minLengthMsg = textElem?.getAttribute('minlength_msg') as string;
                     span.innerHTML = minLengthMsg;
-                } else if (elem.validity.tooLong) {
-                    const maxLengthMsg = elem?.getAttribute('maxlength_msg') as string;
+                } else if (textElem.validity.tooLong) {
+                    const maxLengthMsg = textElem?.getAttribute('maxlength_msg') as string;
                     span.innerHTML = maxLengthMsg;
                 }
                 valid = false;
@@ -110,13 +132,22 @@ export const checkValidation = (elem: any) => {
 
 export const chckInputValidation = (inputElement: any) => {
     if (inputElement.id) {
-        let span = inputElement?.nextSibling as HTMLSpanElement;
-        if (span) {
+        let span = inputElement?.nextElementSibling;
+       
+        if (span && span.tagName === 'SPAN') {
             span.innerHTML = '';
+        }
+
+        if (!inputElement.checkValidity() || inputElement.getAttribute('match_input_id')) {
+            if (!(span && span.tagName === 'SPAN')) {
+                span = document.createElement('span');
+                span.classList.value = 'text-danger d-flex notValid';
+                inputElement?.parentNode?.insertBefore(span, inputElement.nextElementSibling);
+            }
         } else {
-            span = document.createElement('span');
-            span.className = 'text-danger';
-            inputElement?.parentNode?.insertBefore(span, inputElement.nextElementSibling);
+            if (span && span.tagName === 'SPAN') {
+                span.remove();
+            }
         }
 
         if (!inputElement.checkValidity() || (inputElement.required && inputElement.value.trim() === '')) {
@@ -129,6 +160,9 @@ export const chckInputValidation = (inputElement: any) => {
             } else if (inputElement.validity.typeMismatch && inputElement.type === 'email') {
                 const emailMsg = inputElement?.getAttribute('email_msg') as string;
                 span.innerHTML = emailMsg;
+            } else if (inputElement.validity.typeMismatch && inputElement.type === 'url') {
+                const urlMsg = inputElement?.getAttribute('url_msg') as string;
+                span.innerHTML = urlMsg;
             } else if (inputElement.validity.typeMismatch) {
                 const typeMsg = inputElement?.getAttribute('type_msg') as string;
                 span.innerHTML = typeMsg;
@@ -147,6 +181,16 @@ export const chckInputValidation = (inputElement: any) => {
             }
 
             return false;
+        }
+
+        if (inputElement.getAttribute('match_input_id')) {
+            const matchId = inputElement.getAttribute('match_input_id') as string;
+            const matchInput = document.getElementById(matchId) as HTMLInputElement;
+            if (matchInput.value && inputElement.value !== matchInput.value) {
+                const misMatchMsg = inputElement.getAttribute('mis_match_msg') as string;
+                span.innerHTML = misMatchMsg;
+                return false;
+            }
         }
         return true;
     }
