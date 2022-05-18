@@ -1,22 +1,23 @@
-# reactjs-form-validation
+# reactjs-form-validator
 
-reactjs-form-validation is very easy to use. It’s working with form control properties like (required – pattern – min -max – minLength - maxLength………..etc) and it isn’t used only with form tag. It can be used else with a div that contain a collection of inputs.
+reactjs-form-validator is very easy to use. It’s working with form control properties like (required – pattern – min -max – minLength - maxLength………..etc) and it isn’t used only with form tag. It can be used else with a div that contain a collection of inputs.
 
 ## Usage
 
 1.  Install
 
-            npm install reactjs-form-validation --save
+            npm install reactjs-form-validator --save
 
 2.  Import
-    import { checkFormValidation,chckInputValidation } from 'reactjs-form-validation';
+          
+            import { checkFormValidation,chckInputValidation } from 'reactjs-form-validator';
 
 ## Example
 
 ```javascript
 import React, { FC, useRef, useState } from "react";
 
-import { chckInputValidation, checkValidation } from "reactjs-form-validation";
+import { chckInputValidation, checkValidation } from "reactjs-form-validator";
 
 interface CreateOrUpdateEmployeeProps {}
 
@@ -193,7 +194,7 @@ set submit button as disabled if Form is invalid
 
 import React, { FC, useRef, useState } from "react";
 
-import { chckInputValidation, checkValidation } from "reactjs-form-validation";
+import { chckInputValidation, checkValidation } from "reactjs-form-validator";
 
 interface CreateOrUpdateEmployeeProps {}
 
