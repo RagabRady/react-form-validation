@@ -10,7 +10,7 @@ reactjs-form-validator is very easy to use. It’s working with form control pro
 
 2.  Import
           
-            import { checkFormValidation,chckInputValidation } from 'reactjs-form-validator';
+            import { chckInputValidation, checkValidation } from 'reactjs-form-validator';
 
 ## Example
 
